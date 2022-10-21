@@ -7,7 +7,6 @@ import requests
 
 from press.utils import log_error
 from frappe.model.document import Document
-from frappe.utils import get_url
 from press.press.doctype.site.site import Site
 
 
@@ -19,12 +18,7 @@ class MarketplaceAppSubscription(Document):
 
 	def set_secret_key(self):
 		if not self.secret_key:
-			from hashlib import blake2b
-
-			h = blake2b(digest_size=20)
-			h.update(self.name.encode())
-			self.secret_key = h.hexdigest()
-
+			self.secret_key = frappe.generate_hash(length=40)
 			self.create_site_config_key()
 
 	def create_site_config_key(self):
@@ -84,15 +78,18 @@ class MarketplaceAppSubscription(Document):
 		key_id = f"sk_{self.app}"
 		secret_key = self.secret_key
 
-		config = {
-			key_id: secret_key,
-			"login_url": get_url(
-				f"/api/method/press.api.developer.marketplace.get_login_url?secret_key={secret_key}"
-			),
-		}
+		config = [
+			{"key": key_id, "value": secret_key, "type": "String"},
+			{
+				"key": "subscription",
+				"value": {"login_url": get_login_url(secret_key)},
+				"type": "JSON",
+			},
+		]
+
 		expiry = frappe.db.get_value("Site", self.site, "trial_end_date")
 		if expiry:
-			config.update({"expiry": str(expiry)})
+			config[1]["value"].update({"expiry": str(expiry)})
 
 		site_doc.update_site_config(config)
 
@@ -345,3 +342,11 @@ def install_subscription_apps(site, app):
 		{sa.app for sa in site_doc.apps}
 	):
 		site_doc.install_app(app)
+
+
+def get_login_url(secret_key):
+	from frappe.utils import get_url
+
+	return get_url(
+		f"/api/method/press.api.developer.marketplace.get_login_url?secret_key={secret_key}"
+	)

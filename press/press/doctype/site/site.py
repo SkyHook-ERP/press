@@ -909,6 +909,20 @@ class Site(Document):
 			self.reload()
 			self.trial_end_date = ""
 			self.save()
+			self.update_subscription_config()
+
+	def update_subscription_config(self, expiry: str = ""):
+		from press.marketplace.doctype.marketplace_app_subscription.marketplace_app_subscription import (
+			get_login_url,
+		)
+
+		doc = "Marketplace App Subscription"
+		filters = {"status": "Active", "site": self.name}
+		if frappe.db.exists(doc, filters):
+			secret_key = frappe.db.get_value(doc, filters, "secret_key")
+			self.update_site_config(
+				{"subscription": {"expiry": expiry, "login_url": get_login_url(secret_key)}}
+			)
 
 	def unsuspend_if_applicable(self):
 		try:
@@ -954,15 +968,10 @@ class Site(Document):
 
 	@frappe.whitelist()
 	def suspend(self, reason=None):
-		site_status = (
-			"suspended_saas"
-			if self.standby_for and self.standby_for != "erpnext"
-			else "suspended"
-		)
 		log_site_activity(self.name, "Suspend Site", reason)
 		self.status = "Suspended"
 		self.update_site_config({"maintenance_mode": 1})
-		self.update_site_status_on_proxy(site_status)
+		self.update_site_status_on_proxy("suspended")
 		self.deactivate_app_subscriptions()
 
 	def deactivate_app_subscriptions(self):
@@ -1161,11 +1170,13 @@ class Site(Document):
 		)
 
 	@classmethod
-	def exists(cls, subdomain) -> bool:
+	def exists(cls, subdomain, domain) -> bool:
 		"""Check if subdomain is available"""
 		return bool(
 			frappe.db.exists("Blocked Domain", {"name": subdomain})
-			or frappe.db.exists("Site", {"subdomain": subdomain, "status": ("!=", "Archived")})
+			or frappe.db.exists(
+				"Site", {"subdomain": subdomain, "domain": domain, "status": ("!=", "Archived")}
+			)
 		)
 
 

@@ -29,7 +29,7 @@ class BaseServer(Document):
 	def after_insert(self):
 		if self.ip:
 			self.create_dns_record()
-		self.update_virtual_machine_name()
+			self.update_virtual_machine_name()
 
 	def create_dns_record(self):
 		try:
@@ -351,6 +351,17 @@ class BaseServer(Document):
 		machine.stop()
 		machine.resize(machine_type)
 		machine.start()
+
+	def run_press_job(self, job_name):
+		return frappe.get_doc(
+			{
+				"doctype": "Press Job",
+				"job_type": job_name,
+				"server_type": self.doctype,
+				"server": self.name,
+				"virtual_machine": self.virtual_machine,
+			}
+		).insert()
 
 
 class Server(BaseServer):

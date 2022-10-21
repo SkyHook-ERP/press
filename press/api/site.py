@@ -734,7 +734,6 @@ def get_installed_apps(site):
 			app_source.is_free = frappe.db.get_value(
 				"Marketplace App Plan", subscription.marketplace_app_plan, "is_free"
 			)
-			print(app_source.subscription_available)
 		else:
 			app_source.subscription = {}
 
@@ -959,10 +958,10 @@ def restore(name, files, skip_failing_patches=False):
 
 
 @frappe.whitelist()
-def exists(subdomain):
+def exists(subdomain, domain):
 	from press.press.doctype.site.site import Site
 
-	return Site.exists(subdomain)
+	return Site.exists(subdomain, domain)
 
 
 @frappe.whitelist()

@@ -10,19 +10,12 @@
   "trial_sites_count",
   "column_break_2",
   "bench_configuration",
-  "lets_encrypt_section",
-  "certbot_directory",
-  "webroot_directory",
-  "rsa_key_size",
-  "column_break_15",
-  "eff_registration_email",
-  "use_staging_ca",
+  "billing_tab",
   "stripe_settings_section",
+  "stripe_inr_plan_id",
   "stripe_publishable_key",
-  "stripe_account",
   "create_stripe_plans",
   "stripe_product_id",
-  "stripe_inr_plan_id",
   "stripe_usd_plan_id",
   "create_stripe_webhook",
   "stripe_webhook_endpoint_id",
@@ -47,25 +40,21 @@
   "frappeio_api_key",
   "column_break_39",
   "frappeio_api_secret",
+  "backups_tab",
   "offsite_backups_section",
   "offsite_backups_provider",
   "aws_s3_bucket",
   "backup_rotation_scheme",
-  "offsite_backups_count",
   "column_break_35",
   "offsite_backups_access_key_id",
   "offsite_backups_secret_access_key",
-  "section_break_33",
-  "create_github_app",
-  "github_app_id",
-  "github_app_client_id",
-  "github_app_client_secret",
-  "column_break_36",
-  "github_app_public_link",
-  "github_webhook_secret",
-  "github_access_token",
-  "section_break_41",
-  "github_app_private_key",
+  "offsite_backups_count",
+  "backups_section",
+  "backup_interval",
+  "backup_offset",
+  "column_break_48",
+  "backup_limit",
+  "docker_tab",
   "section_break_59",
   "docker_registry_url",
   "docker_registry_namespace",
@@ -80,24 +69,17 @@
   "code_server_password",
   "auto_update_section",
   "auto_update_queue_size",
-  "backups_section",
-  "backup_interval",
-  "backup_offset",
-  "backup_limit",
   "remote_files_section",
   "remote_uploads_bucket",
   "remote_link_expiry",
   "column_break_51",
   "remote_access_key_id",
   "remote_secret_access_key",
-  "telegram_section",
-  "telegram_chat_id",
-  "column_break_65",
-  "telegram_bot_token",
   "product_documentation_section",
   "publish_docs",
   "storage_and_disk_limits_section",
   "enforce_storage_limits",
+  "erpnext_tab",
   "erpnext_signups_section",
   "erpnext_domain",
   "erpnext_cluster",
@@ -114,26 +96,54 @@
   "standby_pool_size",
   "column_break_95",
   "standby_queue_size",
-  "monitoring_section",
-  "monitor_server",
-  "monitor_token",
-  "telegram_alert_chat_id",
-  "column_break_100",
-  "log_server",
+  "integrations_tab",
+  "telegram_section",
+  "telegram_chat_id",
+  "column_break_65",
+  "telegram_bot_token",
+  "mailgun_settings_section",
+  "mailgun_api_key",
+  "root_domain",
+  "column_break_117",
+  "default_outgoing_id",
+  "default_outgoing_pass",
+  "section_break_33",
+  "create_github_app",
+  "github_app_id",
+  "github_app_client_id",
+  "github_app_client_secret",
+  "column_break_36",
+  "github_app_public_link",
+  "github_webhook_secret",
+  "github_access_token",
+  "section_break_41",
+  "github_app_private_key",
+  "marketplace_tab",
+  "marketplace_settings_section",
+  "max_allowed_screenshots",
+  "allow_developer_account",
+  "infrastructure_tab",
   "agent_section",
   "agent_repository_owner",
   "column_break_105",
   "agent_github_access_token",
-  "marketplace_settings_section",
-  "allow_developer_account",
-  "max_allowed_screenshots",
-  "mailgun_settings_section",
-  "mailgun_api_key",
-  "root_domain",
-  "default_outgoing_id",
-  "default_outgoing_pass",
+  "lets_encrypt_section",
+  "certbot_directory",
+  "webroot_directory",
+  "rsa_key_size",
+  "column_break_15",
+  "eff_registration_email",
+  "use_staging_ca",
   "ssh_section",
-  "ssh_certificate_authority"
+  "ssh_certificate_authority",
+  "monitoring_section",
+  "telegram_alert_chat_id",
+  "monitor_server",
+  "column_break_100",
+  "monitor_token",
+  "log_server",
+  "feature_flags_tab",
+  "verify_cards_with_micro_charge"
  ],
  "fields": [
   {
@@ -195,7 +205,6 @@
    "read_only": 1
   },
   {
-   "collapsible": 1,
    "fieldname": "stripe_settings_section",
    "fieldtype": "Section Break",
    "label": "Stripe Settings"
@@ -261,7 +270,6 @@
    "label": "ERPNext URL"
   },
   {
-   "collapsible": 1,
    "fieldname": "offsite_backups_section",
    "fieldtype": "Section Break",
    "label": "Offsite Backups"
@@ -373,7 +381,6 @@
    "label": "Code Server Password"
   },
   {
-   "collapsible": 1,
    "fieldname": "backups_section",
    "fieldtype": "Section Break",
    "label": "Backups"
@@ -421,7 +428,6 @@
    "label": "Total Backups Count"
   },
   {
-   "collapsible": 1,
    "fieldname": "telegram_section",
    "fieldtype": "Section Break",
    "label": "Telegram"
@@ -453,7 +459,6 @@
    "label": "Product Documentation"
   },
   {
-   "collapsible": 1,
    "fieldname": "lets_encrypt_section",
    "fieldtype": "Section Break",
    "label": "Let's Encrypt"
@@ -478,7 +483,6 @@
    "label": "URL"
   },
   {
-   "collapsible": 1,
    "fieldname": "section_break_59",
    "fieldtype": "Section Break",
    "label": "Docker Registry"
@@ -569,7 +573,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "collapsible": 1,
    "fieldname": "erpnext_signups_section",
    "fieldtype": "Section Break",
    "label": "ERPNext Signups"
@@ -677,7 +680,6 @@
    "label": "Telegram Alert Chat ID"
   },
   {
-   "collapsible": 1,
    "fieldname": "agent_section",
    "fieldtype": "Section Break",
    "label": "Agent"
@@ -728,7 +730,6 @@
    "label": "Backup Limit"
   },
   {
-   "collapsible": 1,
    "fieldname": "marketplace_settings_section",
    "fieldtype": "Section Break",
    "label": "Marketplace Settings"
@@ -747,10 +748,9 @@
    "non_negative": 1
   },
   {
-   "collapsible": 1,
    "fieldname": "mailgun_settings_section",
    "fieldtype": "Section Break",
-   "label": "Mailgun Settings"
+   "label": "Mailgun"
   },
   {
    "fieldname": "root_domain",
@@ -844,11 +844,66 @@
    "fieldname": "stripe_secret_key",
    "fieldtype": "Password",
    "label": "Stripe Secret Key"
+  },
+  {
+   "fieldname": "billing_tab",
+   "fieldtype": "Tab Break",
+   "label": "Billing"
+  },
+  {
+   "fieldname": "docker_tab",
+   "fieldtype": "Tab Break",
+   "label": "Docker"
+  },
+  {
+   "fieldname": "backups_tab",
+   "fieldtype": "Tab Break",
+   "label": "Backups"
+  },
+  {
+   "fieldname": "integrations_tab",
+   "fieldtype": "Tab Break",
+   "label": "Integrations"
+  },
+  {
+   "fieldname": "marketplace_tab",
+   "fieldtype": "Tab Break",
+   "label": "Marketplace"
+  },
+  {
+   "fieldname": "erpnext_tab",
+   "fieldtype": "Tab Break",
+   "label": "ERPNext"
+  },
+  {
+   "fieldname": "column_break_117",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "infrastructure_tab",
+   "fieldtype": "Tab Break",
+   "label": "Infrastructure"
+  },
+  {
+   "fieldname": "column_break_48",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "feature_flags_tab",
+   "fieldtype": "Tab Break",
+   "label": "Feature Flags"
+  },
+  {
+   "default": "No",
+   "fieldname": "verify_cards_with_micro_charge",
+   "fieldtype": "Select",
+   "label": "Verify Cards with Micro Charge",
+   "options": "No\nOnly INR\nOnly USD\nBoth INR and USD"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2022-08-24 14:22:59.222237",
+ "modified": "2022-10-17 15:57:24.551328",
  "modified_by": "Administrator",
  "module": "Press",
  "name": "Press Settings",

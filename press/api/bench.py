@@ -624,7 +624,7 @@ def certificate(name):
 @protected("Release Group")
 def generate_certificate(name):
 	user_ssh_key = frappe.get_all(
-		"User SSH Key", {"user": frappe.session.user}, pluck="name"
+		"User SSH Key", {"user": frappe.session.user, "is_default": True}, pluck="name"
 	)[0]
 	return frappe.get_doc(
 		{
@@ -642,3 +642,9 @@ def generate_certificate(name):
 @protected("Release Group")
 def get_title_and_creation(name):
 	return frappe.db.get_value("Release Group", name, ["title", "creation"], as_dict=True)
+
+
+@frappe.whitelist()
+@protected("Release Group")
+def rename(name, title):
+	return frappe.db.set_value("Release Group", name, "title", title)
